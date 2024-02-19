@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <span>Monopoly4u</span>
+  <router-view></router-view>
 </template>
