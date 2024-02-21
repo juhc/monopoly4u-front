@@ -11,13 +11,12 @@ defineProps({
         type: [Number, null],
         default: null
     },
-    width: {
+    direction: {
         type: String,
-        default: "80px"
-    },
-    height: {
-        type: String,
-        default: "160px"
+        default: 'vertical',
+        validator(value, props) {
+            return ['vertical', 'horizontal'].includes(value)
+        }
     }
 })
 
@@ -25,7 +24,7 @@ const title = ref('Test Property')
 </script>
 
 <template>
-    <FieldTemplate :width="width" :height="height">
+    <FieldTemplate :direction="direction">
         <div class="text-lg font-mono font-bold self-center text-center">
             {{ title }}
         </div>

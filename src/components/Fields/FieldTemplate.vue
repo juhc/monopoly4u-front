@@ -1,25 +1,30 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
 
-defineProps({
+const props = defineProps({
     image: String,
     backgroundColor: {
         type: String,
         default: "#fafafa"
     },
-    width: {
+    direction: {
         type: String,
-        default: "80px"
-    },
-    height: {
-        type: String,
-        default: "160px"
+        default: 'vertical',
+        validator(value, props) {
+            return ['vertical', 'horizontal'].includes(value)
+        }
     }
+})
+
+const size = computed(() => {
+    return props.direction == 'vertical' ? { width: "80px", height: "160px" } : { width: "160px", height: "80px" };
 })
 </script>
 
 <template>
-    <div class="flex flex-col p-4" :style="{'background-color':backgroundColor, width:width, height:height}">
-        <slot></slot>
+    <div class="flex flex-col p-4" :style="{ 'background-color': backgroundColor, width: size.width, height: size.height }">
+        <slot>
+
+        </slot>
     </div>
 </template>

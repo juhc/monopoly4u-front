@@ -1,10 +1,12 @@
 <script setup>
-
+import { defineProps } from 'vue';
 
 import FieldTemplate from './FieldTemplate.vue';
 
 
-
+defineProps({
+    image: String
+})
 </script>
 
 <template>
