@@ -1,8 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
-
-import FieldTemplate from './FieldTemplate.vue';
-
+import FieldTemplate from './Templates/FieldTemplate.vue';
 
 defineProps({
     direction: {
@@ -17,6 +14,6 @@ defineProps({
 
 <template>
     <FieldTemplate>
-       Special Field
+        Special Field
     </FieldTemplate>
 </template>

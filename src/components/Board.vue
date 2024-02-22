@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import PropertyField from './Fields/PropertyField.vue';
-import CornerTemplate from './Fields/CornerTemplate.vue';
+import PropertyField from './Fields/PropertyField.vue'
+import CornerTemplate from './Fields/Templates/CornerTemplate.vue';
 import SpecialField from './Fields/SpecialField.vue';
 import ActionsHistory from './ActionsHistory.vue';
 

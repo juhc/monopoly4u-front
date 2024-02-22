@@ -1,7 +1,8 @@
 <script setup>
-import { ref, defineProps, useAttrs } from 'vue';
+import { ref, useAttrs } from 'vue';
 
-import FieldTemplate from './FieldTemplate.vue';
+
+import FieldTemplate from './Templates/FieldTemplate.vue';
 
 
 defineProps({
