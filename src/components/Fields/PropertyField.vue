@@ -1,7 +1,11 @@
 <script setup>
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, useAttrs } from 'vue';
 
 import FieldTemplate from './FieldTemplate.vue';
+
+
+const attr = useAttrs();
+console.log(attr.test)
 
 defineProps({
     title: String,

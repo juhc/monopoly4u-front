@@ -1,5 +1,5 @@
 <script setup>
-import { DefineProps } from 'vue';
+import { defineProps } from 'vue';
 
 import FieldTemplate from './FieldTemplate.vue';
 
@@ -17,6 +17,6 @@ defineProps({
 
 <template>
     <FieldTemplate>
-
+       
     </FieldTemplate>
 </template>
