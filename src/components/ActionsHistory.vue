@@ -1,9 +1,11 @@
 <script setup>
+import { useSize } from '@/utils/useSize';
 
+const SIZE = useSize()
 </script>
 
 <template>
-    <div class="w-[495px] h-[495px] bg-zinc-50">
+    <div class="bg-zinc-50" :style="{width: `${SIZE.ACTIONS_HISTORY.SIDE}px`, height: `${SIZE.ACTIONS_HISTORY.SIDE}px`}">
         <div>
             asldkfjksdlajf
         </div>
