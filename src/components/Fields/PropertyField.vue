@@ -4,7 +4,6 @@ import { ref, useAttrs } from 'vue';
 
 import FieldTemplate from './Templates/FieldTemplate.vue';
 
-
 defineProps({
     title: String,
     rent: Number,

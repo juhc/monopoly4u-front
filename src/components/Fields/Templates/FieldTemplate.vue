@@ -17,7 +17,7 @@ const props = defineProps({
 })
 
 const size = computed(() => {
-    return props.direction == 'vertical' ? { width: "80px", height: "100px" } : { width: "100px", height: "80px" };
+    return props.direction == 'vertical' ? { width: "55px", height: "100px" } : { width: "100px", height: "55px" };
 })
 </script>
 

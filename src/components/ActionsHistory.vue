@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="w-[720px] h-[720px] bg-zinc-50">
+    <div class="w-[495px] h-[495px] bg-zinc-50">
         <div>
             asldkfjksdlajf
         </div>
