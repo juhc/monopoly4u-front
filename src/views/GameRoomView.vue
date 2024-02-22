@@ -3,5 +3,7 @@ import Board from '@/components/Board.vue';
 </script>
 
 <template>
-    <Board />
+    <div class="flex justify-center">
+        <Board />
+    </div>
 </template>

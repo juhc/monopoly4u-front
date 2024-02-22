@@ -17,14 +17,14 @@ const props = defineProps({
 })
 
 const size = computed(() => {
-    return props.direction == 'vertical' ? { width: "80px", height: "160px" } : { width: "160px", height: "80px" };
+    return props.direction == 'vertical' ? { width: "80px", height: "100px" } : { width: "100px", height: "80px" };
 })
 </script>
 
 <template>
     <div class="flex flex-col p-4" :style="{ 'background-color': backgroundColor, width: size.width, height: size.height }">
         <slot>
-
+            
         </slot>
     </div>
 </template>

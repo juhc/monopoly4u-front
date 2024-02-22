@@ -17,6 +17,6 @@ defineProps({
 
 <template>
     <FieldTemplate>
-       
+       Special Field
     </FieldTemplate>
 </template>
