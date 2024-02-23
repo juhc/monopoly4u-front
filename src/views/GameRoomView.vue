@@ -1,5 +1,5 @@
 <script setup>
-import Board from '@/components/Board.vue';
+import Board from '@/components/GameRoomComponents/Board.vue';
 </script>
 
 <template>

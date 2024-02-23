@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, reactive } from 'vue';
+import { ref } from 'vue';
 
 import PropertyField from './Fields/PropertyField.vue'
 import CornerTemplate from './Fields/Templates/CornerTemplate.vue';
@@ -50,8 +50,6 @@ function getFieldDirectionByLineIndex(index) {
 
     return lineIndex % 2 == 1 ? "horizontal" : "vertical"
 }
-
-console.log(fields)
 </script>
 
 <template>

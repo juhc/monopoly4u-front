@@ -1,3 +1,9 @@
+<script setup>
+import LoginForm from '@/components/LoginForm.vue';
+</script>
+
 <template>
-    Страница авторизации
+    <div class="flex justify-center">
+        <LoginForm />
+    </div>
 </template>

@@ -4,7 +4,6 @@ import { useAttrs } from 'vue';
 import FieldTemplate from './Templates/FieldTemplate.vue';
 
 const attrs = useAttrs();
-console.log(attrs)
 </script>
 
 <template>
