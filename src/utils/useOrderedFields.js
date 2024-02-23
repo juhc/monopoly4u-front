@@ -138,15 +138,15 @@ export function useOrderedFields() {
             component: "special"
         },
         {
-            component: "special",
-            category: "smarphones"
+            component: "property",
+            category: "smartphones"
         },
         {
             component: "special"
         },
         {
-            component: "special",
-            category: "smarphones"
+            component: "property",
+            category: "smartphones"
         },
     ]
 }

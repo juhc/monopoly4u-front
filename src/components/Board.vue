@@ -44,18 +44,28 @@ function getComponentPosition(index) {
 
     return Object.fromEntries(map)
 }
+
+function getFieldDirectionByLineIndex(index) {
+    let lineIndex = getLineIndex(index);
+
+    return lineIndex % 2 == 1 ? "horizontal" : "vertical"
+}
+
+console.log(fields)
 </script>
 
 <template>
     <div class="relative" :style="{ width: `${SIZE.BOARD.SIDE}px`, height: `${SIZE.BOARD.SIDE}px` }">
-        <ActionsHistory class="absolute top-[100px] left-[100px] border-[#1f2937] border-2" />
+        <ActionsHistory class="absolute border-[#1f2937] border-2"
+            :style="{ left: `${SIZE.CORNER.SIDE}px`, top: `${SIZE.CORNER.SIDE}px` }" />
+
         <template v-for="(field, index) in fields">
 
             <PropertyField v-if="field.component == 'property'" class="absolute border-[#1f2937] border-2"
-                :style="getComponentPosition(index)" />
+                :style="getComponentPosition(index)" :direction="getFieldDirectionByLineIndex(index)" />
 
             <SpecialField v-else-if="field.component == 'special'" class="absolute border-[#1f2937] border-2"
-                :style="getComponentPosition(index)" />
+                :style="getComponentPosition(index)" :direction="getFieldDirectionByLineIndex(index)" />
 
             <CornerTemplate v-else class="absolute border-[#1f2937] border-2" :style="getComponentPosition(index)" />
 

@@ -15,7 +15,7 @@ defineProps({
 })
 
 const attrs = useAttrs()
-console.log(attrs)
+
 const title = ref('Test Property')
 </script>
 
