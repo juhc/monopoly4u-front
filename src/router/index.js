@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import GameRoomView from "@/views/GameRoomView.vue"
-import LoginView from "@/views/LoginView.vue"
+import AuthorizationView from "@/views/AuthorizationView.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,9 +11,9 @@ const router = createRouter({
             component: GameRoomView
         },
         {
-            path: '/login',
+            path: '/auth',
             name: 'login',
-            component: LoginView
+            component: AuthorizationView
         }
     ]
 })
