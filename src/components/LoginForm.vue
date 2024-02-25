@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 
 import BaseButton from './UI/BaseButton.vue'
-import signIn from "../services/auth.js"
+import BaseInput from './UI/BaseInput.vue';
+import { signIn } from "../services/auth.js"
 
 
 const email = ref('');
@@ -17,22 +18,24 @@ const password = ref('');
         <form class="flex flex-col text-zinc-950 mt-3">
             <div class="flex flex-col">
                 <label for="email" class="text-base">Электронная почта</label>
-                <input v-model="email"
-                    class="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 rounded-md"
-                    name="email" type="email" placeholder="Введите адрес эл. почты">
+                <BaseInput placeholder="Введите адрес эл. почты" v-model="email" name="email" type="text" />
             </div>
             <hr class="mt-3">
             <div>
                 <label for="password" class="text-base">Пароль</label>
-                <input v-model="password"
-                    class="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600 rounded-md"
-                    name="password" type="password" placeholder="Введите пароль">
+                <BaseInput placeholder="Введите пароль" v-model="password" name="password" type="password" />
             </div>
             <div class="flex flex-row mt-3">
                 <BaseButton :onClick="signIn">
                     Войти
                 </BaseButton>
                 <a href="#" class="m-2 text-sky-500 hover:text-sky-600">Забыли пароль?</a>
+            </div>
+            <hr class="mt-3">
+            <div class="flex flex-row justify-center mt-3">
+                <RouterLink :to="{ name: 'sign-up' }" class="text-sky-500 hover:text-sky-600">
+                    Регистрация
+                </RouterLink>
             </div>
         </form>
     </div>
