@@ -8,7 +8,7 @@ const router = useRouter();
 </script>
 
 <template>
-    <header class="w-full min-w-[1000px] justify-center h-20 bg-transparent mb-7">
+    <header class="w-full min-w-[1000px] justify-center h-20 bg-transparent mb-16">
         <nav class="flex items-center text-sm h-20 mx-auto max-w-[1000px] text-zinc-50 font-medium">
             <RouterLink :to="{name:'home'}"><div class="bg-indigo-500 h-20 w-[150px]">LOGO</div></RouterLink>
             <div

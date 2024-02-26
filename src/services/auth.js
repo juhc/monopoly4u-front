@@ -6,8 +6,6 @@ export function signIn(userData) {
         password: userData.password
     })
 
-    console.log('signIN')
-
     return response
 }
 
@@ -17,8 +15,6 @@ export function signUp(userData) {
         username: userData.username,
         password: userData.password
     })
-
-    console.log('signUP')
 
     return response
 }

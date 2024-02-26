@@ -1,5 +1,5 @@
 <template>
-    <div class="text-zinc-50 mt-36">
+    <div class="text-zinc-50">
         <div class="flex flex-col justify-center text-center">
             <div class="text-5xl font-bold">Приглашаем в Монополию.</div>
             <div class="text-xl font-semibold mt-5">Это отличное место, чтобы поиграть с друзьями в легендарную настольную
