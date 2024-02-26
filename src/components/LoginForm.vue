@@ -1,23 +1,26 @@
 <script setup>
 import { ref, watch, reactive } from 'vue';
+import { useForm } from 'vee-validate';
+import { object, string } from 'yup';
 
-import BaseButton from './UI/BaseButton.vue'
+import BaseButton from './UI/BaseButton.vue';
 import BaseInput from './UI/BaseInput.vue';
-import { signIn } from "../services/auth.js"
-import { validateEmail } from '@/utils/validators';
+import { signIn } from '@/services/auth';
 
 
-const userData = reactive({
-    email: "",
-    password: ""
+const schema = object({
+    email: string().required().email(),
+    password: string().required().min(8)
 })
 
+const { handleSubmit } = useForm({
+    validationSchema: schema,
+}, {
+    validateOnValueUpdate: false
+})
 
-const errorEmail = ref('')
-
-watch(userData.email, () => {
-    if(email.value)
-        errorEmail.value = validateEmail(userData.email) ? null : "Некоректный адрес электронной почты"
+const onSubmit = handleSubmit((values) => {
+    signIn(values)
 })
 </script>
 
@@ -26,16 +29,13 @@ watch(userData.email, () => {
         <span class="text-3xl font-semibold">
             Авторизация
         </span>
-        <h1>{{ errorEmail }}</h1>
-        <form @submit.prevent="" class="flex flex-col text-zinc-950 mt-3">
+        <form @submit="onSubmit" :validation-schema="schema" class="flex flex-col text-zinc-950 mt-3">
             <div class="flex flex-col">
-                <label for="email" class="text-base">Электронная почта</label>
-                <BaseInput placeholder="Введите адрес эл. почты" v-model="userData.email" name="email" type="email" />
+                <BaseInput name="email" type="email" placeholder="Введите адрес эл. почты">Электронная почта</BaseInput>
             </div>
             <hr class="mt-3">
-            <div>
-                <label for="password" class="text-base">Пароль</label>
-                <BaseInput placeholder="Введите пароль" v-model="userData.password" name="password" type="password" minLength="8" />
+            <div class="flex flex-col">
+                <BaseInput name="password" type="password" placeholder="Введите пароль">Введите пароль</BaseInput>
             </div>
             <div class="flex flex-row mt-3">
                 <BaseButton type="submit">

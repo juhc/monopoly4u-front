@@ -1,16 +1,24 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { useForm } from 'vee-validate';
+import { object, string, ref } from 'yup';
 
 import BaseButton from './UI/BaseButton.vue'
 import BaseInput from './UI/BaseInput.vue';
+import { signUp } from '@/services/auth';
 
 
-const userData = reactive({
-    email: "",
-    username: "",
-    password: "",
-    password_confirm: ""
+const schema = object({
+    email: string().required().email(),
+    username: string().required().trim(),
+    password: string().required().min(8),
+    password_confirm: string().required().min(8).oneOf([ref('password')])
 })
+
+const { handleSubmit } = useForm({
+    validationSchema: schema
+})
+
+const onSubmit = handleSubmit((values) => signUp(values))
 </script>
 
 <template>
@@ -18,25 +26,27 @@ const userData = reactive({
         <span class="text-3xl font-semibold">
             Регистрация
         </span>
-        <form @submit.prevent=""  class="flex flex-col text-zinc-950 mt-3">
+        <form @submit="onSubmit" class="flex flex-col text-zinc-950 mt-3">
             <div class="flex flex-col">
-                <BaseInput placeholder="Введите адрес эл. почты" v-model="userData.email" name="email" type="text">Электронная почта
+                <BaseInput placeholder="Введите адрес эл. почты" name="email" type="text">
+                    Электронная почта
                 </BaseInput>
             </div>
             <hr class="mt-3">
             <div class="flex flex-col">
-                <BaseInput placeholder="Введите имя пользователя" v-model="userData.username" name="username" type="text">Никнейм
+                <BaseInput placeholder="Введите имя пользователя" name="username" type="text">
+                    Никнейм
                 </BaseInput>
             </div>
             <hr class="mt-3">
             <div>
-                <BaseInput placeholder="Введите пароль" v-model="userData.password" name="password" type="password">Пароль
+                <BaseInput placeholder="Введите пароль" name="password" type="password">Пароль
                 </BaseInput>
             </div>
             <hr class="mt-3">
             <div>
-                <BaseInput placeholder="Повторите пароль" v-model="userData.password_confirm" name="password_confirm"
-                    type="password">Подтверждение пароля</BaseInput>
+                <BaseInput placeholder="Повторите пароль" name="password_confirm" type="password">Подтверждение пароля
+                </BaseInput>
             </div>
             <div class="flex flex-row justify-center mt-3">
                 <BaseButton type="submit" class="w-full" :style="{ height: '35px' }">
