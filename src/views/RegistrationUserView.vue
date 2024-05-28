@@ -7,3 +7,4 @@ import SignUpForm from '@/components/SignUpForm.vue';
         <SignUpForm />
     </div>
 </template>
+

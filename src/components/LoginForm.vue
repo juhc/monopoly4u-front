@@ -1,12 +1,12 @@
 <script setup>
-import { ref, watch, reactive } from 'vue';
 import { useForm } from 'vee-validate';
 import { object, string } from 'yup';
 
 import BaseButton from './UI/BaseButton.vue';
 import BaseInput from './UI/BaseInput.vue';
-import { signIn } from '@/services/auth';
-
+import { signIn } from '@/api/auth'
+import { useAuthStore } from '@/stores/auth'
+import router from '@/router';
 
 const schema = object({
     email: string().required().email(),
@@ -19,8 +19,19 @@ const { handleSubmit } = useForm({
     validateOnValueUpdate: false
 })
 
-const onSubmit = handleSubmit((values) => {
-    signIn(values)
+const authStore = useAuthStore();
+
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
+    await signIn({
+        email: values.email,
+        password: values.password
+    });
+    if (authStore.isAuthError) {
+        alert(authStore.authErrorMessage);
+        resetForm();
+    } else {
+        router.push('/user')
+    }
 })
 </script>
 
@@ -31,7 +42,7 @@ const onSubmit = handleSubmit((values) => {
         </span>
         <form @submit="onSubmit" :validation-schema="schema" class="flex flex-col text-zinc-950 mt-3">
             <div class="flex flex-col">
-                <BaseInput name="email" type="email" placeholder="Введите адрес эл. почты">Электронная почта</BaseInput>
+                <BaseInput name="email" type="text" placeholder="Введите адрес эл. почты">Электронная почта</BaseInput>
             </div>
             <hr class="mt-3">
             <div class="flex flex-col">

@@ -1,9 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import GameRoomView from "@/views/GameRoomView.vue"
-import AuthorizationView from "@/views/AuthorizationView.vue"
-import RegistrationUserView from "@/views/RegistrationUserView.vue"
-import HomeView from "@/views/HomeView.vue"
-import UserProfileView from "@/views/UserProfileView.vue"
+import { createRouter, createWebHistory } from 'vue-router';
+import GameRoomView from "@/views/GameRoomView.vue";
+import AuthorizationView from "@/views/AuthorizationView.vue";
+import RegistrationUserView from "@/views/RegistrationUserView.vue";
+import HomeView from "@/views/HomeView.vue";
+import UserProfileView from "@/views/UserProfileView.vue";
+import FindGameView from "@/views/FindGameView.vue";
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,29 +13,65 @@ const router = createRouter({
         {
             path: "/",
             name: "home",
-            component: HomeView
+            component: HomeView,
+            meta: {
+                auth: false
+            }
         },
         {
             path: "/user",
             name: "user",
-            component: UserProfileView
+            component: UserProfileView,
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/game-room',
             name: 'gameRoom',
-            component: GameRoomView
+            component: GameRoomView,
+            meta: {
+                auth: true
+            }
         },
         {
             path: '/auth',
             name: 'sign-in',
-            component: AuthorizationView
+            component: AuthorizationView,
+            meta: {
+                auth: false
+            }
         },
         {
             path: '/sign-up',
             name: 'sign-up',
-            component: RegistrationUserView
+            component: RegistrationUserView,
+            meta: {
+                auth: false
+            }
+        },
+        {
+            path: '/games',
+            name: 'games',
+            component: FindGameView,
+            meta: {
+                auth: true
+            }
         }
     ]
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+    const tokens = JSON.parse(localStorage.getItem('userTokens'));
+    let token = null
+    if (tokens) {
+        token = tokens.access_token;
+    }
+    if (to.meta.auth && !token) {
+        next('/auth');
+    } else {
+        next();
+    }
+});
+
+export default router;

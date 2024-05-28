@@ -4,7 +4,9 @@ import { object, string, ref } from 'yup';
 
 import BaseButton from './UI/BaseButton.vue'
 import BaseInput from './UI/BaseInput.vue';
-import { signUp } from '@/services/auth';
+import { signUp } from '@/api/auth';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 
 const schema = object({
@@ -14,11 +16,27 @@ const schema = object({
     password_confirm: string().required().min(8).oneOf([ref('password')])
 })
 
+const router = useRouter();
+const authStore = useAuthStore();
+
 const { handleSubmit } = useForm({
     validationSchema: schema
 })
 
-const onSubmit = handleSubmit((values) => signUp(values))
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
+    await signUp({
+        email: values.email,
+        nickname: values.username,
+        password: values.password
+    });
+    if (authStore.isAuthError) {
+        alert(authStore.authErrorMessage);
+        resetForm();
+    } else {
+        alert('Пользователь успешно зарегистрирован');
+        router.push('/auth');
+    }
+})
 </script>
 
 <template>
