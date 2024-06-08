@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 import { useAuthStore } from "./stores/auth";
 import { URLs } from "./api/urls";
+import router from '@/router';
 
 
 export const socket = io(`${URLs.socket}`, {
@@ -12,10 +13,8 @@ export const socket = io(`${URLs.socket}`, {
 });
 
 socket.on("connect", () => {
-    console.log('connected')
 });
 
-socket.on("disconnect", () => {
-    const authStore = useAuthStore();
-    socket.emit("test")
+socket.on("disconnect", (reason) => {
+    router.go();
 });

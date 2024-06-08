@@ -1,6 +1,3 @@
-import { reactive } from "vue";
-
-
 export function useSize() {
     const FIELD_WIDTH = 55;
     const FIELD_HEIGHT = 100;

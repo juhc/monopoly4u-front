@@ -24,13 +24,13 @@ export const useAuthStore = defineStore('auth', () => {
         userInfo.username = '';
         isAuth.value = false;
         localStorage.clear();
-        socket.disconnect();
+        socket.disconnect()
         router.push({name: 'home'});
     }
 
     const checkUserAuth = async () => {
         await getUserProfile();
-        if (isAuth) {
+        if (isAuth.value) {
             socket.auth.token = userInfo.token;
             socket.connect();
         }

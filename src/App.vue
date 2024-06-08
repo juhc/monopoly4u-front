@@ -1,6 +1,5 @@
 <script setup>
 import Header from './components/Header.vue';
-import { socket } from "@/socket";
 import { useAuthStore } from "@/stores/auth";
 
 

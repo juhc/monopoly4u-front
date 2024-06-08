@@ -4,12 +4,14 @@ import { socket } from '@/socket';
 import GameRoomsList from '../components/GameRoomsList.vue';
 import BaseButton from "@/components/UI/BaseButton.vue";
 import ModalCreateGame from "@/components/UI/ModalCreateGame.vue";
-import { useAuthStore } from "@/stores/auth";
+import router from "@/router";
+import { useGameStore } from "@/stores/game";
 
 
-const authStore = useAuthStore();
 const gamesList = ref([]);
 const showModalCreateGame = ref(false);
+
+const gameStore = useGameStore();
 
 socket.on("games", (data) => {
     gamesList.value = data;
@@ -60,6 +62,11 @@ socket.on("delete_game", (data) => {
     if (roomIndex !== -1) {
         gamesList.value.splice(roomIndex, 1);
     }
+})
+
+socket.on("room_teleport", (room_id) => {
+    socket.emit("connect_to_game", room_id);
+    router.push(`/game-room/${room_id}`);
 })
 
 socket.emit("get_games_list");

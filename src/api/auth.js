@@ -15,39 +15,37 @@ authAPIInstance.interceptors.request.use((config) => {
 })
 
 const signIn = async (userData) => {
-    await authAPIInstance.post("/auth/sign-in", { ...userData }).then((response) => {
-        const authStore = useAuthStore();
+    const authStore = useAuthStore();
+    await authAPIInstance.post("/auth/sign-in", { ...userData }).then(async (response) => {
         const data = response.data;
-        if (data.type == 'error') {
+        const token = data.token;
+        authStore.isAuthError = false;
+        authStore.isAuth = true;
+        authStore.userInfo.token = token;
+        localStorage.setItem('userTokens', JSON.stringify({
+            access_token: token
+        }));
+    }).catch((error) => {
+        if (error.status === 401) {
             authStore.authErrorMessage = 'Неправильный логин или пароль';
-            authStore.isAuthError = true;
-        } else {
-            const token = data.token;
-            authStore.isAuthError = false;
-            authStore.isAuth = true;
-            authStore.userInfo.token = token;
-            localStorage.setItem('userTokens', JSON.stringify({
-                access_token: token
-            }));
-            socket.auth.token = token;
-            socket.connect();
         }
+        else {
+            authStore.authErrorMessage = 'Сервер недоступен';
+        }
+        authStore.isAuthError = true;
     })
+    socket.auth.token = authStore.userInfo.token;
+    socket.connect();
 }
 
 const signUp = async (userData) => {
     await authAPIInstance.post("/auth/sign-up", { ...userData }).then((response) => {
         const authStore = useAuthStore();
         const data = response.data;
-        if (data.type == "error") {
-            authStore.authErrorMessage = "Пользователь с таким именем уже зарегистрирован!";
-            authStore.isAuthError = true;
-        }
-        else {
-            authStore.isAuthError = false;
-        }
+        authStore.isAuthError = false;
     }).catch((error) => {
-        console.log(error)
+        authStore.authErrorMessage = "Пользователь с таким именем уже зарегистрирован!";
+        authStore.isAuthError = true;
     })
 }
 

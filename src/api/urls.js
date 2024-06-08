@@ -1,6 +1,7 @@
 const URLs = {
-    auth: 'http://127.0.0.1:8080/api',
-    socket: 'http://127.0.0.1:8000'
+    auth: 'http://127.0.0.1/auth-service',
+    socket: 'http://127.0.0.1',
+    game: "http://127.0.0.1/game"
 }
 
-export {URLs}
+export { URLs }

@@ -27,7 +27,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/game-room',
+            path: '/game-room/:room_id',
             name: 'gameRoom',
             component: GameRoomView,
             meta: {

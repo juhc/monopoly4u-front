@@ -1,29 +1,18 @@
 <script setup>
 import { ref, useAttrs } from 'vue';
-
+import { URLs } from "@/api/urls";
 
 import FieldTemplate from './Templates/FieldTemplate.vue';
 
-defineProps({
-    title: String,
-    rent: Number,
-    category: String,
-    stars: {
-        type: [Number, null],
-        default: null
-    }
-})
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
-const title = ref('Test Property')
+const name = defineModel('name');
+const id = defineModel('id')
 </script>
 
 <template>
-    <FieldTemplate :direction="attrs.direction">
-        <div class="text-sm font-mono font-bold self-center text-center">
-            {{ title }}
-        </div>
-        <img :src="{ image }" class="self-center">
+    <FieldTemplate :name="name" :id="id" :direction="attrs.direction">
+        <img :src="`${URLs.game}/images/${name}.png`" class="self-center w-10 drop-shadow-[0_5px_4px_rgba(0,0,0,0.5)]">
     </FieldTemplate>
 </template>
